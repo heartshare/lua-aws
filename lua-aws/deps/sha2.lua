@@ -189,12 +189,13 @@ end
 ----------------------------------------------------------------------
 local HH = {}    -- to reuse
 
-local function hash224 (msg)
-  msg = preproc(msg, #msg)
+local function hash224 (msg, len)
+  len = len or #msg
+  msg = preproc(msg, len)
   local H = initH224(HH)
 
   -- Process the message in successive 512-bit (64 bytes) chunks:
-  for i = 1, #msg, 64 do
+  for i = 1, len, 64 do
     digestblock(msg, i, H)
   end
 
@@ -202,12 +203,13 @@ local function hash224 (msg)
 end
 
 
-local function hash256 (msg)
-  msg = preproc(msg, #msg)
+local function hash256 (msg, len)
+  len = len or #msg
+  msg = preproc(msg, len)
   local H = initH256(HH)
 
   -- Process the message in successive 512-bit (64 bytes) chunks:
-  for i = 1, #msg, 64 do
+  for i = 1, len, 64 do
     digestblock(msg, i, H)
   end
 
